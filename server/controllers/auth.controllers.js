@@ -40,7 +40,7 @@ export const signupController = async (req, res) => {
 
 		if (newUser) {
 			generateTokenAndSetCookie(newUser._id, res);
-			return res.status(201).json({ ...newUser._doc });
+			return res.status(201).json({ ...newUser._doc, password: undefined });
 		}
 
 		res.status(400).json({ error: "Invalid field data" });
