@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { fetcher } from "./../utils/axios";
+
 export const useGetConversation = () => {
 	const [loading, setLoading] = useState(false);
 	const [conversations, setConversations] = useState([]);
@@ -8,14 +10,9 @@ export const useGetConversation = () => {
 		async function loadConversation() {
 			try {
 				setLoading(true);
-				const res = await fetch("/api/users");
-				const data = await res.json();
+				const res = await fetcher.get("/users");
 
-				if (data.error) {
-					throw new Error(data.error);
-				}
-
-				setConversations(data);
+				setConversations(res.data);
 			} catch (error) {
 				throw new Error(error.message);
 			} finally {

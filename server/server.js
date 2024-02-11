@@ -10,7 +10,12 @@ import userRoutes from "./routes/user.routes.js";
 import { app, server } from "./socket/socket.js";
 
 dotenv.config();
-app.use(cors());
+app.use(
+	cors({
+		credentials: true,
+		origin: ["http://localhost:3000"],
+	})
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

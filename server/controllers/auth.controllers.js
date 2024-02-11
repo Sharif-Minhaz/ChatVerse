@@ -45,7 +45,7 @@ export const signupController = async (req, res) => {
 
 		res.status(400).json({ error: "Invalid field data" });
 	} catch (err) {
-		console.log(`Error in signup controller, ${err.message}`);
+		console.error(`Error in signup controller, ${err.message}`);
 		res.status(500).json({ error: "Internal server error" });
 	}
 };
@@ -59,7 +59,6 @@ export const loginController = async (req, res) => {
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPasswordCorrect) {
-			console.log(isPasswordCorrect, user);
 			return res.status(400).json({ error: "Invalid username or password" });
 		}
 
@@ -72,17 +71,17 @@ export const loginController = async (req, res) => {
 			profilePic: user.profilePic,
 		});
 	} catch (error) {
-		console.log("Error in login controller", error.message);
+		console.error("Error in login controller", error.message);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
 
-export const logoutController = (req, res) => {
+export const logoutController = (_, res) => {
 	try {
 		res.cookie("auth", "", { maxAge: 0 });
 		res.status(200).json({ message: "Logged out successfully" });
 	} catch (error) {
-		console.log("Error in logout controller", error.message);
+		console.error("Error in logout controller", error.message);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };

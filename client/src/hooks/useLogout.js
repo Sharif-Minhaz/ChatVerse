@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../contexts/AuthContext";
+import { fetcher } from "../utils/axios";
 
 export const useLogout = () => {
 	const { setAuthUser } = useAuthContext();
@@ -9,15 +10,12 @@ export const useLogout = () => {
 	const logout = async () => {
 		setLoading(true);
 		try {
-			const res = await fetch("/api/auth/logout", {
-				method: "post",
-				headers: { "Content-Type": "application/json" },
-			});
-			const data = await res.json();
+			const res = await fetcher.post(`/auth/logout`);
 
-			if (data.error) {
-				throw new Error(data.error);
+			if (res.status !== 200) {
+				throw new Error("Something went wrong");
 			}
+
 			localStorage.removeItem("chat-user");
 			setAuthUser(null);
 		} catch (error) {

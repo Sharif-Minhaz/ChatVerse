@@ -11,9 +11,9 @@ export const generateGirlProfilePic = (username) => {
 export const generateTokenAndSetCookie = (userId, res) => {
 	const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "15d" });
 	res.cookie("auth", token, {
-		maxAge: 15 * 24 * 60 * 60 * 1000,
-		httpOnly: true,
-		sameSite: "strict",
-		secure: process.env.NODE_ENV !== "development",
+		maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+		secure: process.env.NODE_ENV === "development" ? false : true,
+		httpOnly: process.env.NODE_ENV === "development" ? false : true,
+		sameSite: process.env.NODE_ENV === "development" ? false : "none",
 	});
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../contexts/AuthContext";
+import { fetcher } from "../utils/axios";
 
 export const useLogin = () => {
 	const { setAuthUser } = useAuthContext();
@@ -13,19 +14,13 @@ export const useLogin = () => {
 		setLoading(true);
 
 		try {
-			const res = await fetch("/api/auth/login", {
-				method: "post",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ username, password }),
+			const res = await fetcher.post(`/auth/login`, {
+				username,
+				password,
 			});
-			const data = await res.json();
 
-			if (data.error) {
-				throw new Error(data.error);
-			}
-
-			localStorage.setItem("chat-user", JSON.stringify(data));
-			setAuthUser(data);
+			localStorage.setItem("chat-user", JSON.stringify(res.data));
+			setAuthUser(res.data);
 		} catch (error) {
 			toast.error(error.message);
 		} finally {
