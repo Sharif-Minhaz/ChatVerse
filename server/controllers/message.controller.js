@@ -33,7 +33,7 @@ export const sendMessageController = async (req, res) => {
 		const receiverSocketId = getReceiverSocketId(receiverId);
 
 		if (receiverSocketId) {
-			io.to(receiverId).emit("newMessage", newMessage);
+			io.to(receiverSocketId).emit("message", newMessage);
 		}
 
 		res.status(201).json(newMessage);
