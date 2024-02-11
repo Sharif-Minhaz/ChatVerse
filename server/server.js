@@ -16,7 +16,7 @@ dotenv.config();
 app.use(
 	cors({
 		credentials: true,
-		origin: ["http://localhost:5000"],
+		origin: ["https://chatverse-9vo5.onrender.com"],
 	})
 );
 app.use(cookieParser());
@@ -37,6 +37,6 @@ app.get("*", (req, res) => {
 
 connectToMongoDB()
 	.then(() => {
-		server.listen(PORT, () => console.info(`Server is running at: http://localhost:${PORT}`));
+		server.listen(PORT, () => console.info(`Server is running at: ${PORT}`));
 	})
 	.catch((err) => console.error(err.message));
