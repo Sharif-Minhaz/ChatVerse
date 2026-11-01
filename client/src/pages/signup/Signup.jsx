@@ -26,7 +26,7 @@ export default function Signup() {
 
 	return (
 		<div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-			<div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+			<div className="w-full p-6 rounded-lg bg-slate-900 shadow-xl">
 				<h1 className="text-3xl font-semibold text-center text-white">
 					Sign Up <span className="text-blue-300"> ChatApp</span>
 				</h1>
@@ -34,7 +34,7 @@ export default function Signup() {
 				<form onSubmit={handleSubmit}>
 					<div>
 						<label className="label p-2">
-							<span className="text-base label-text">Full Name</span>
+							<span className="text-base label-text !text-slate-100">Full Name</span>
 						</label>
 						<input
 							type="text"
@@ -42,13 +42,13 @@ export default function Signup() {
 							name="fullName"
 							onChange={handleChange}
 							value={formData.fullName}
-							className="w-full input input-bordered h-10"
+							className="w-full input input-bordered h-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 active:border-sky-300 disabled:cursor-not-allowed disabled:opacity-60"
 						/>
 					</div>
 
 					<div>
 						<label className="label p-2 ">
-							<span className="text-base label-text">Username</span>
+							<span className="text-base label-text !text-slate-100">Username</span>
 						</label>
 						<input
 							type="text"
@@ -56,13 +56,13 @@ export default function Signup() {
 							name="username"
 							value={formData.username}
 							onChange={handleChange}
-							className="w-full input input-bordered h-10"
+							className="w-full input input-bordered h-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 active:border-sky-300 disabled:cursor-not-allowed disabled:opacity-60"
 						/>
 					</div>
 
 					<div>
 						<label className="label">
-							<span className="text-base label-text">Password</span>
+							<span className="text-base label-text !text-slate-100">Password</span>
 						</label>
 						<input
 							type="password"
@@ -70,13 +70,13 @@ export default function Signup() {
 							value={formData.password}
 							onChange={handleChange}
 							placeholder="Enter Password"
-							className="w-full input input-bordered h-10"
+							className="w-full input input-bordered h-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 active:border-sky-300 disabled:cursor-not-allowed disabled:opacity-60"
 						/>
 					</div>
 
 					<div>
 						<label className="label">
-							<span className="text-base label-text">Confirm Password</span>
+							<span className="text-base label-text !text-slate-100">Confirm Password</span>
 						</label>
 						<input
 							type="password"
@@ -84,14 +84,14 @@ export default function Signup() {
 							onChange={handleChange}
 							value={formData.confirmPassword}
 							placeholder="Confirm Password"
-							className="w-full input input-bordered h-10"
+							className="w-full input input-bordered h-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 active:border-sky-300 disabled:cursor-not-allowed disabled:opacity-60"
 						/>
 					</div>
 
 					<GenderCheckbox selectedGender={formData.gender} handleChange={handleChange} />
 
 					<Link
-						className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
+						className="mt-2 inline-block text-base text-slate-100 hover:text-white hover:underline active:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
 						to="/login"
 					>
 						Already have an account?
@@ -101,7 +101,7 @@ export default function Signup() {
 						<button
 							disabled={loading}
 							type="submit"
-							className="btn btn-block btn-sm mt-2 border border-slate-700"
+							className="btn btn-block btn-sm mt-2 border border-slate-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
 						>
 							{loading ? (
 								<span className="loading loading-spinner"></span>
