@@ -1,5 +1,6 @@
 import { useSocketContext } from "../../contexts/SocketContext";
 import useConversation from "../../store/useConversation";
+import { generateProfilePicFallback } from "../../utils";
 
 const Conversation = ({ conversation, emoji, lastIdx }) => {
 	const { selectedConversation, setSelectedConversation } = useConversation();
@@ -18,7 +19,17 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
 			>
 				<div className={`avatar ${isOnline ? "online" : "offline"}`}>
 					<div className="w-12 rounded-full">
-						<img src={conversation.profilePic} alt="user avatar" />
+						<img
+							src={conversation.profilePic}
+							alt="user avatar"
+							onError={(event) => {
+								const image = event.currentTarget;
+								if (!image.dataset.fallbackApplied && conversation.username) {
+									image.dataset.fallbackApplied = "true";
+									image.src = generateProfilePicFallback(conversation.username);
+								}
+							}}
+						/>
 					</div>
 				</div>
 

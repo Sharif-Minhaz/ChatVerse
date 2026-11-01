@@ -52,6 +52,12 @@ export const getRandEmoji = () => {
 	return funEmojis[Math.floor(Math.random() * funEmojis.length)];
 };
 
+export const generateProfilePicFallback = (username) => {
+	const avatarUrl = new URL("https://api.dicebear.com/10.x/avataaars/svg");
+	avatarUrl.searchParams.set("seed", username);
+	return avatarUrl.toString();
+};
+
 export function extractTime(dateString) {
 	const date = new Date(dateString);
 	const hours = padZero(date.getHours());
